@@ -1,0 +1,13 @@
+10.1.1.252
+--encrypt by tommy public key
+gpg --armor --recipient tommy --output c:/123.encrypt.txt --encrypt c:/123.txt
+--sign by tstar private key
+gpg --armor --recipient tstar --output c:/123.encrypt.sign.txt --sign c:/123.encrypt.txt
+================================================================================================================
+10.1.2.58
+--verify
+gpg --armor --recipient tstar --verify e:/tmp/123.encrypt.sign.txt
+--decrypt by tstar public key
+gpg --armor --recipient tstar --output e:/tmp/123.verify.sign.txt --decrypt e:/tmp/123.encrypt.sign.txt
+--decrypt by tommy private key
+gpg --armor --recipient tommy --output e:/tmp/123.verify.decrypt.txt --decrypt e:/tmp/123.verify.sign.txt

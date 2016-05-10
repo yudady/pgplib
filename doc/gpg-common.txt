@@ -1,0 +1,164 @@
+pub   2048R/12829FE1 2016-03-22
+uid                  tommy (tommy) <tommy@tommy.com>
+sub   2048R/95A8FE2D 2016-03-22
+
+pub   2048R/6833EC9E 2016-03-22
+uid                  tstar (tstar comment) <tstar@tstar.com>
+sub   2048R/E810743B 2016-03-22
+
+
+tommy / tommy
+tstart / 123456
+---------------------------------
+gpg --gen-key
+
+gpg --list-keys
+gpg --list-secret-keys
+gpg --fingerprint tstar
+gpg --fingerprint tommy
+
+
+pgpdump e:/tommy.asc
+gpg --list-packets a4ff2279.asc
+---------------------------------
+
+gpg --delete-secret-keys tstar
+gpg --delete-keys tstar
+
+gpg --delete-secret-keys tommy
+gpg --delete-keys tommy
+---------------------------------
+
+
+
+
+gpg --edit-key tstar
+gpg --import e:/tstar.asc
+gpg --import c:/tommy.asc
+
+
+gpg --export-secret-key -a "tommy" > e:/tommy_gpg_private.key
+
+
+---------------------------------
+導出（備份）私鑰  公鑰： 
+gpg --export --armor --output e:/tommy_public.asc tommy
+gpg --export-secret-keys --armor --output e:/tommy_private.asc  tommy
+*導入私鑰: 
+gpg --import e:/tommy_private.asc 
+---------------------------------
+加密(Encrypt is recipient)
+假定有一個文本文件demo.txt，怎樣對它加密呢？   encrypt參數用於加密。
+gpg --armor --recipient tommy --output e:/123.en.txt --encrypt e:/123.txt
+解密
+gpg --output c:/123.de.txt --decrypt c:/123.en.txt 
+---------------------------------
+簽名
+gpg --armor --output e:/123.sig.txt --sign e:/123.txt
+gpg --verify e:/123.sig.txt
+gpg --output e:/123.verify.txt --decrypt e:/123.sig.txt
+-----------------------------------
+*簽名： 
+gpg --armor -o e:/123.en.sign.txt -ser tstar e:/123.txt 
+
+
+gpg --armor -o e:/123.sign.txt -ser tommy e:/123.txt 
+gpg --clearsign e:/123.sign.txt 
+gpg --verify e:/123.sign.txt
+
+
+*恢復加密的簽名文件： 
+gpg -o c:/123.de.txt --decrypt c:/123.en.txt 
+---------------------------------
+gpg --armor --recipient tommy --output c:/123.en.txt --encrypt c:/123.txt
+gpg --armor --recipient tstar --output c:/123.en.sig.txt --sign c:/123.en.txt
+
+gpg --verify e:/123.en.sig.txt
+gpg --armor --output e:/123.verify.txt --decrypt e:/123.en.sig.txt
+gpg --output e:/123.de.txt --decrypt e:/123.verify.txt
+
+
+
+
+---------------------------------
+gpg --armor --recipient tommy --output e:/123.sign.txt --sign e:/123.txt
+gpg --verify e:/123.sign.txt
+gpg --clearsign e:/123.sign.txt
+
+gpg --armor --output e:/123.verify.txt --decrypt e:/123.sign.txt
+
+
+gpg -a -o demo.txt -ser tommy e:/demo.txt 
+gpg --verify demo.txt.asc
+
+
+gpg --clearsign demo.txt
+
+
+
+
+
+
+gpg --armor --recipient tommy --sign e:/123.txt
+gpg --verify  e:/123.txt.asc
+
+
+gpg --armor --recipient tommy --verify e:/tmp/123.sign.txt
+			gpg --armor --recipient tommy --detach-sign e:/tmp/123.sign.txt
+			gpg --armor --recipient tommy --verify e:/tmp/123.sign.txt.asc
+			???		gpg --armor --recipient tommy --output e:/tmp/123.clearsign.txt --clearsign e:/tmp/123.sign.txt
+gpg --armor --recipient tommy --verify e:/tmp/123.clearsign.txt
+
+
+gpg --verify  e:/123.txt 
+
+--clearsign
+--output e:/123.verify.txt 
+
+
+gpg --armor --recipient tommy --output e:/123.encrypt.txt --encrypt e:/123.txt
+gpg --armor --recipient tommy --output e:/123.decrypt.txt --decrypt 123.encrypt.txt
+
+
+
+
+
+
+-----------------------------------------------------------
+gpg --armor -ser tommy e:/123.txt
+gpg --armor --output e:/123.de.txt --decrypt e:/123.txt.asc
+gpg --armor -se -r tommy e:/123.txt
+gpg --armor --output e:/123.de.txt --decrypt e:/123.txt.asc
+
+
+
+
+
+
+
+
+gpg --armor --sign 123.txt
+gpg --output e:/tmp/123.decrypt.txt --decrypt 123.txt.asc
+
+
+gpg --output e:/tmp/doc.sig --sign doc
+gpg --output e:/tmp/doc.decrypt --decrypt e:/tmp/doc.sig
+
+gpg --clearsign e:/tmp/doc.sigt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

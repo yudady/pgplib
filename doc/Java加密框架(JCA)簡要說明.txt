@@ -1,0 +1,41 @@
+ 加密服務總是關聯到一個特定的算法或類型,它既提供了密碼操作(如Digital Signature或MessageDigest),生成或供應所需的加密材料(Key或Parameters)加密操作,也會以一個安全的方式生成數據對象(KeyStore或Certificate),封裝(壓縮)密鑰(可以用於加密操作)。
+
+    Java Security API中，一個engine class就是定義了一種加密服務，不同的engine class提供不同的服務。下面就來看看有哪些engine class：
+
+1）MessageDigest：對消息進行hash算法生成消息摘要（digest）。
+
+2）Signature：對數據進行簽名、驗證數字簽名。
+
+3）KeyPairGenerator：根據指定的算法生成配對的公鑰、私鑰。
+
+4）KeyFactory：根據Key說明（KeySpec）生成公鑰或者私鑰。
+
+5）CertificateFactory：創建公鑰證書和證書吊銷列表（CRLs）。
+
+6）KeyStore：keystore是一個keys的數據庫。Keystore中的私鑰會有一個相關聯的證書鏈，證書用於鑑定對應的公鑰。一個keystore也包含其它的信任的實體。
+
+7）AlgorithmParameters：管理算法參數。KeyPairGenerator就是使用算法參數，進行算法相關的運算，生成KeyPair的。生成Signature時也會用到。
+
+8）AlgorithmParametersGenerator：用於生成AlgorithmParameters。
+
+9）SecureRandom：用於生成隨機數或者偽隨機數。
+
+10）CertPathBuilder：用於構建證書鏈。
+
+11）CertPathValidator：用於校驗證書鏈。
+
+12）CertStore：存儲、獲取證書鏈、CRLs到（從）CertStore中。
+
+ 
+
+從上面這些engine class中，可以看出JCA（Java加密框架）中主要就是提供了4種服務：Digest、Key、Cert、Signature、Alogorithm。
+
+1） 對消息內容使用某種hash算法就可以生成Digest。
+
+2） 利用KeyFactory、KeyPairGenerator就可以生成公鑰、私鑰。
+
+3） 證書中心使用公鑰就可生成Cert。
+
+4） 可以使用私鑰和Digest就可以消息進行簽名Signature。
+
+5） 不論是Digest、Key、Cert、Signature，都要使用到算法Algorithm。
