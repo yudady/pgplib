@@ -15,9 +15,11 @@ import com.didisoft.pgp.inspect.PGPInspectLib;
  */
 public class AnalyzeOpenPGPFile {
 
-	public static String SRC = System.getProperty("user.dir") + "/src/";
+	public static String SRC = System.getProperty("user.dir") + "/src/main/resources/";
 
 	public static void main(String[] args) throws IOException, PGPException {
+
+		System.out.println(SRC);
 
 		String openpgpFile = SRC + "examples/DataFiles/encrypted.pgp";
 		System.out.println(openpgpFile);
